@@ -108,7 +108,7 @@ jobs:
 
       - name: Build Jars
         working-directory: ./celeritas
-        run: ./gradlew packageJar
+        run: ./gradlew packageJar --continue
 
       - name: Move Babric Dir (2)
         working-directory: ./celeritas
@@ -116,7 +116,7 @@ jobs:
 
       - name: Build Jars (babric)
         working-directory: ./celeritas
-        run: ./gradlew :babric:packageJar
+        run: ./gradlew :babric:packageJar --continue
 
       - name: Debug
         run: java Main
