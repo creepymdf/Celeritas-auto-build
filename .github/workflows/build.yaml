@@ -102,13 +102,24 @@ jobs:
       - name: Fix Gradle permission
         run: chmod +x ./celeritas/gradlew
 
+      - name: Move Babric Dir
+        working-directory: ./celeritas
+        run: mv babric/ ..
+
       - name: Build Jars
         working-directory: ./celeritas
         run: ./gradlew packageJar
 
-      - name: Debug
+      - name: Move Babric Dir (2)
         working-directory: ./celeritas
-        run: ls -R
+        run: mv ../babric/ .
+
+      - name: Build Jars (babric)
+        working-directory: ./celeritas
+        run: ./gradlew :babric:packageJar
+
+      - name: Debug
+        run: java Main
 
       - name: Update hash storage
         run: echo $COMMIT_HASH > ./latest_commit
